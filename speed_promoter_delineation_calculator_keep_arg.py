@@ -28,8 +28,8 @@ print("Computing optimal promoter window...", file=sys.stderr, flush=True)
 
 out_path = "promoter_delineations.tsv"
 with open(out_path, "w") as out:
-    for i in range(-10000, 10000):
-        for j in range(i + 1, 10000):
+    for i in range(-10000, -1):
+        for j in range(1, 10000):
             # O(1) window sum using prefix sums
             left_idx = np.searchsorted(positions, i)
             right_idx = np.searchsorted(positions, j, side="right") - 1
