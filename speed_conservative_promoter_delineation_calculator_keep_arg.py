@@ -8,10 +8,18 @@ import numpy as np
 import sys
 
 median_file = sys.argv[1]
+
+# Position 2: Core_size (optional; can be empty or absent)
 if len(sys.argv) < 3 or sys.argv[2] == '':
     core_size = 0
 else:
-    core_size = int(sys.argv[2])
+    try:
+        core_size = int(sys.argv[2])
+    except ValueError:
+        core_size = 0   # or exit with error message
+
+# Position 3: Suffix (optional)
+suffix = sys.argv[3] if len(sys.argv) > 3 else ""
 
 # Read data once: position (col1), median methylation (col2)
 df = pd.read_csv(median_file,
@@ -32,7 +40,8 @@ best_windows = []  # keep all (i,j) with current max
 
 print("Computing optimal promoter window...", file=sys.stderr, flush=True)
 
-out_path = "promoter_delineations.tsv"
+base_name = "promoter_delineations"
+out_path = f"{base_name}_{suffix}.tsv"
 with open(out_path, "w") as out:
     for i in range(-10000, -1*core_size+1):
         for j in range(core_size, 10001):
