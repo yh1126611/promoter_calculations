@@ -7,19 +7,15 @@ import pandas as pd
 import numpy as np
 import sys
 
+# Handle your three arguments
 median_file = sys.argv[1]
 
-# Position 2: Core_size (optional; can be empty or absent)
-if len(sys.argv) < 3 or sys.argv[2] == '':
+if len(sys.argv) < 3 or sys.argv[2] == "":
     core_size = 0
 else:
-    try:
-        core_size = int(sys.argv[2])
-    except ValueError:
-        core_size = 0   # or exit with error message
+    core_size = int(sys.argv[2])
 
-# Position 3: Suffix (optional)
-suffix = sys.argv[3] if len(sys.argv) > 3 else ""
+suffix = sys.argv[3] if len(sys.argv) > 3 else ""   # only non‑empty if arg3 exists
 
 # Read data once: position (col1), median methylation (col2)
 df = pd.read_csv(median_file,
