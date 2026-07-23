@@ -51,9 +51,13 @@ tvd_test <- function(df, value_col = "MP", dir_col = "Dir", bin_col = "Bin", n_p
 
     p_value <- (sum(perm_tvd >= obs_tvd) + 1) / (n_perm + 1)
 
-    mean1 <- mean(x1)
-    mean2 <- mean(x2)
-    larger_dir <- ifelse(mean1 > mean2, group_vals[1], group_vals[2])
+    x5 <- subdf[[value_col]][subdf[[dir_col]] == "5'"]
+    x3 <- subdf[[value_col]][subdf[[dir_col]] == "3'"]
+
+    mean_5prime <- mean(x5, na.rm = TRUE)
+    mean_3prime <- mean(x3, na.rm = TRUE)
+
+    larger_dir <- ifelse(mean_5prime > mean_3prime, "5'", "3'")
 
     cat(sprintf("Bin: %s, TVD: %.4f, p-value: %.6f, Larger Dir: %s\n", bin_val, obs_tvd, p_value, larger_dir))
 
