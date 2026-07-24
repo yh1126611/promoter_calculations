@@ -109,8 +109,8 @@ process_one_file <- function(filename, bin_size = 10, bound = 2000) {
     "nonCpG"
   }
 
-  outfilename_tvd_data <- paste0(assembly_name, "_10_tvd_data_", prefix, ".tsv")
-  outfilename_pvalues  <- paste0(assembly_name, "_10_pvalues_", prefix, ".tsv")
+  outfilename_tvd_data <- paste0(assembly_name, "_corrected_tvd_data_", prefix, ".tsv")
+  outfilename_pvalues  <- paste0(assembly_name, "_corrected_pvalues_", prefix, ".tsv")
 
   write.table(out_tvd_data, file = outfilename_tvd_data, row.names = FALSE, col.names = FALSE, sep = "\t")
   write.table(pvalues, file = outfilename_pvalues, row.names = FALSE, col.names = FALSE, sep = "\t")
